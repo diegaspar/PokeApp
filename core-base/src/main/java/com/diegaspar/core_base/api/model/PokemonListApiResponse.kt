@@ -14,9 +14,8 @@ data class PokemonApiResult(
     @SerializedName("url")
     val url: String
 ) {
-    fun toDomain(): Pokemon {
+    fun toDomain(index: Int): Pokemon {
         //TODO add some tests
-        val id = url.trimEnd('/').split("/").last()
-        return Pokemon(name = name, id = id, url = url)
+        return Pokemon(name = name, url = url)
     }
 }

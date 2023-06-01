@@ -6,7 +6,7 @@ class PokemonRemoteDataSourceImpl(private val service: PokemonApiService) :
     PokemonRemoteDataSource {
 
     override suspend fun getPokemons(offset: Int) =
-        service.getPokemons(offset = offset).results.map {
-            it.toDomain()
+        service.getPokemons(offset = offset).results.mapIndexed { index, pokemonApiResult ->
+            pokemonApiResult.toDomain(index)
         }
 }
