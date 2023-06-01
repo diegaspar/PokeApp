@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-private const val pageSizeLimit = 1000
+private const val pageSizeLimit = 50
 
 interface PokemonApiService {
     @GET("pokemon")

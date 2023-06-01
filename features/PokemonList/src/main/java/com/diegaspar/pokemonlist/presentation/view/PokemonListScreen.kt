@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.CircularProgressIndicator
@@ -24,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import com.diegaspar.pokemonlist.presentation.extensions.isScrolledTo80PerCent
+import com.diegaspar.pokemonlist.presentation.extensions.isScrolledToEnd
 import com.diegaspar.pokemonlist.presentation.model.PokemonUI
 import com.diegaspar.pokemonlist.presentation.state.PokemonListState
 import com.diegaspar.pokemonlist.presentation.viewmodel.PokemonListViewModel
@@ -63,7 +64,7 @@ fun PokemonList(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
 
     val endOfListReached by remember {
         derivedStateOf {
-            scrollState.isScrolledToEnd()
+            scrollState.isScrolledTo80PerCent()
         }
     }
 
@@ -72,10 +73,6 @@ fun PokemonList(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
     }
 
 }
-
-fun LazyListState.isScrolledToEnd() =
-    layoutInfo.visibleItemsInfo.lastOrNull()?.index == layoutInfo.totalItemsCount - 1
-
 
 @Composable
 private fun PokemonRow(it: PokemonUI) {
