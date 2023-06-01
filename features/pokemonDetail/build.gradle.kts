@@ -1,15 +1,14 @@
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
 }
 
 android {
     namespace = "com.diegaspar.pokemondetail"
-    compileSdk = 33
+    compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        minSdk = 26
-        targetSdk = 33
+        minSdk = Config.minSdkVersion
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -41,10 +40,23 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.8.0")
-    implementation("androidx.appcompat:appcompat:1.4.1")
-    implementation("com.google.android.material:material:1.5.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(project(":core-base"))
+
+    implementation(Dependencies.androidCoreKtx)
+    implementation(platform(Dependencies.kotlinBom))
+    implementation(Dependencies.lifeCycleRuntime)
+    implementation(Dependencies.activityCompose)
+    implementation(Dependencies.viewModelCompose)
+    implementation(platform(Dependencies.composeBom))
+    implementation(Dependencies.composeUI)
+    implementation(Dependencies.composeUIGraphics)
+    implementation(Dependencies.composeUIToolingPreview)
+    implementation(Dependencies.composeMaterial3)
+    implementation(Dependencies.composeContraintLayout)
+    implementation(Dependencies.koin)
+    implementation(Dependencies.koinCompose)
+
+    testImplementation(Dependencies.jUnit)
+    debugImplementation(Dependencies.composeTooling)
+    debugImplementation(Dependencies.composeTestManifest)
 }

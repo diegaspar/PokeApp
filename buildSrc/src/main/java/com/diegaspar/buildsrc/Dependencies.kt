@@ -12,6 +12,7 @@ object Dependencies {
     val composeTooling by lazy { "androidx.compose.ui:ui-tooling:${Versions.compose}" }
     val composeTestManifest by lazy { "androidx.compose.ui:ui-test-manifest:${Versions.compose}" }
     val composeContraintLayout by lazy { "androidx.constraintlayout:constraintlayout-compose:${Versions.constraintLayoutCompose}" }
+    val lottieCompose by lazy { "com.airbnb.android:lottie-compose:${Versions.lottie}" }
 
     val koin by lazy { "io.insert-koin:koin-android:${Versions.koin}" }
     val koinCompose by lazy { "io.insert-koin:koin-androidx-compose:${Versions.koinCompose}" }

@@ -2,6 +2,7 @@ package com.diegaspar.pokemonlist.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.diegaspar.core_base.domain.PokemonListPaginated
 import com.diegaspar.pokemonlist.domain.GetPokemonsUseCase
 import com.diegaspar.pokemonlist.presentation.mapper.PokemonUIMapper
 import com.diegaspar.pokemonlist.presentation.state.PokemonListState
@@ -20,11 +21,17 @@ class PokemonListViewModel(
 
     private val _uiState = MutableStateFlow<PokemonListState>(PokemonListState.InitialLoadingState)
     private fun getCurrentPokemonsList() = _uiState.value.list
+    private fun hasNextPage() = _uiState.value.hasNextPage
 
     val uiState: StateFlow<PokemonListState> = _uiState.asStateFlow()
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        _uiState.update { PokemonListState.ErrorState(throwable, getCurrentPokemonsList()) }
+        _uiState.update {
+            when (getCurrentPokemonsList().isEmpty()) {
+                true -> PokemonListState.ErrorStateEmptyList
+                false -> PokemonListState.ErrorState(throwable, getCurrentPokemonsList())
+            }
+        }
     }
 
     init {
@@ -34,26 +41,34 @@ class PokemonListViewModel(
     }
 
     fun getMorePokemons() {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            getNewPokemons()
+        if (hasNextPage()) {
+            viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
+                getNewPokemons()
+            }
         }
     }
 
     private suspend fun getNewPokemons() {
+        val pokemonsSuccessResponse =
+            getPokemonsUseCase.invoke(GetPokemonsUseCase.Params(offset = getCurrentPokemonsList().size))
         _uiState.update {
-            PokemonListState.SuccessState(
-                getCurrentPokemonsList().plus(
-                    getPokemonsUseCase.invoke(GetPokemonsUseCase.Params(offset = getCurrentPokemonsList().size))
-                        .map { pokemon ->
-                            this.pokemonUIMapper.mapFromDomain(pokemon)
-                        }).mapIndexed { index, pokemonUI ->
-                    pokemonUIMapper.addIndexNumber(
-                        index,
-                        pokemonUI
-                    )
-                }
-            )
+            updateUISuccessState(pokemonsSuccessResponse)
         }
     }
+
+    private fun updateUISuccessState(response: PokemonListPaginated) =
+        PokemonListState.SuccessState(
+            pokemonList = getCurrentPokemonsList().plus(
+                response.pokemonList
+                    .map { pokemon ->
+                        pokemonUIMapper.mapFromDomain(pokemon)
+                    }).mapIndexed { index, pokemonUI ->
+                pokemonUIMapper.addIndexNumber(
+                    index,
+                    pokemonUI
+                )
+            },
+            nextPage = response.pageData.hasNextPage
+        )
 }
 

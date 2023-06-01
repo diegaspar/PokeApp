@@ -1,7 +1,9 @@
 package com.diegaspar.core_base.data
 
-import com.diegaspar.core_base.domain.Pokemon
+import com.diegaspar.core_base.domain.PokemonDetail
+import com.diegaspar.core_base.domain.PokemonListPaginated
 
 interface PokemonRemoteDataSource {
-    suspend fun getPokemons(offset: Int): List<Pokemon>
+    suspend fun getPokemons(offset: Int): PokemonListPaginated
+    suspend fun getPokemonDetail(id: String): PokemonDetail
 }

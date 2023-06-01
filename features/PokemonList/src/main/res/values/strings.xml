@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_retrieving_pokemons_list">There was an error retrieving the Pokemons</string>
+    <string name="something_went_wrong_pokemons_list">Something went wrong getting Pokemons</string>
+    <string name="button_try_again">Try again</string>
+</resources>

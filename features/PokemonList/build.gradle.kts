@@ -55,6 +55,7 @@ dependencies {
     implementation(Dependencies.composeContraintLayout)
     implementation(Dependencies.koin)
     implementation(Dependencies.koinCompose)
+    implementation(Dependencies.lottieCompose)
     testImplementation(Dependencies.jUnit)
     debugImplementation(Dependencies.composeTooling)
     debugImplementation(Dependencies.composeTestManifest)

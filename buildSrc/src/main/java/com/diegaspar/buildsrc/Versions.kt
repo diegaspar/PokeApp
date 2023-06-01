@@ -8,6 +8,7 @@ object Versions {
     const val compose = "1.4.3"
     const val composeMaterial3 = "1.1.0"
     const val constraintLayoutCompose = "1.0.1"
+    const val lottie = "6.0.0"
 
     const val koin = "3.4.1"
     const val koinCompose = "3.4.5"

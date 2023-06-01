@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":core-base"))
     implementation(project(":persistence"))
     implementation(project(":features:PokemonList"))
+    implementation(project(":features:pokemonDetail"))
 
     implementation (Dependencies.androidCoreKtx)
     implementation (platform (Dependencies.kotlinBom))

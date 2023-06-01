@@ -4,6 +4,8 @@ import com.diegaspar.core_base.domain.Pokemon
 import com.google.gson.annotations.SerializedName
 
 data class PokemonListApiResponse(
+    @SerializedName("next")
+    val nextUrlPage: String?,
     @SerializedName("results")
     val results: List<PokemonApiResult>
 )
@@ -12,10 +14,9 @@ data class PokemonApiResult(
     @SerializedName("name")
     val name: String,
     @SerializedName("url")
-    val url: String
+    val pokemonUrl: String
 ) {
-    fun toDomain(index: Int): Pokemon {
-        //TODO add some tests
-        return Pokemon(name = name, url = url)
+    fun toDomain(): Pokemon {
+        return Pokemon(name = name, url = pokemonUrl)
     }
 }
