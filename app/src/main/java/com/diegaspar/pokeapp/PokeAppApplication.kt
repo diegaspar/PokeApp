@@ -1,6 +1,9 @@
 package com.diegaspar.pokeapp
 
 import android.app.Application
+import com.diegaspar.core_base.di.dataModule
+import com.diegaspar.core_base.di.networkModule
+import com.diegaspar.pokemonlist.di.pokemonListFeatureModule
 import org.koin.core.context.startKoin
 
 class PokeAppApplication : Application() {
@@ -11,7 +14,11 @@ class PokeAppApplication : Application() {
 
     private fun setupKoin() {
         startKoin {
-            modules()
+            modules(
+                dataModule,
+                networkModule,
+                pokemonListFeatureModule
+            )
         }
     }
 }

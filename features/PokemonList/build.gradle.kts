@@ -1,23 +1,17 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
 }
 
 android {
-    namespace = Config.nameSpace
+    namespace = "com.diegaspar.pokemonlist"
     compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        applicationId = Config.applicationId
         minSdk = Config.minSdkVersion
-        targetSdk = Config.targetSdkVersion
-        versionCode = Config.versionCode
-        versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -42,24 +36,17 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.5"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
 }
 
 dependencies {
 
     implementation(project(":core-base"))
-    implementation(project(":persistence"))
-    implementation(project(":features:PokemonList"))
 
     implementation (Dependencies.androidCoreKtx)
     implementation (platform (Dependencies.kotlinBom))
     implementation (Dependencies.lifeCycleRuntime)
     implementation (Dependencies.activityCompose)
+    implementation (Dependencies.viewModelCompose)
     implementation (platform(Dependencies.composeBom))
     implementation (Dependencies.composeUI)
     implementation (Dependencies.composeUIGraphics)
