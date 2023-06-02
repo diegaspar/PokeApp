@@ -1,5 +1,5 @@
 # PokeApp
-Pokemon App based on the api https://pokeapi.co/. Getting all the pokemons in paginated mode, and going to the detail of every pokemon itself.
+Android Jetpack Compose Pokemon App based on the api https://pokeapi.co/. Getting all the pokemons in paginated mode, and going to the detail of every pokemon itself.
 
 <img src="https://github.com/diegaspar/PokeApp/assets/45268196/297f756d-251d-419d-ba94-2e7f1a045a9c" width="30%" height="30%"/>
 <img src="https://github.com/diegaspar/PokeApp/assets/45268196/0ffe0d2c-4af2-4379-96af-6559c952657e" width="30%" height="30%"/>
