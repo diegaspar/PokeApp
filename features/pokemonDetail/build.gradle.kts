@@ -41,6 +41,7 @@ android {
 dependencies {
 
     implementation(project(":core-base"))
+    implementation(project(":core-ui"))
 
     implementation(Dependencies.androidCoreKtx)
     implementation(platform(Dependencies.kotlinBom))
@@ -55,6 +56,9 @@ dependencies {
     implementation(Dependencies.composeContraintLayout)
     implementation(Dependencies.koin)
     implementation(Dependencies.koinCompose)
+    implementation(Dependencies.lottieCompose)
+    implementation(Dependencies.coilCompose)
+    implementation(Dependencies.palette)
 
     testImplementation(Dependencies.jUnit)
     debugImplementation(Dependencies.composeTooling)

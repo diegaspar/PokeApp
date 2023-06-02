@@ -43,4 +43,13 @@ class PokemonDetailViewModel(
             getPokemonDetailUseCase.invoke(GetPokemonDetailUseCase.Params(id))
         )
     )
+
+    fun onColorsLoaded(mainColor: Int) {
+        _uiState.update {
+            (_uiState.value as PokemonDetailState.SuccessState)
+                .copy(
+                    mainColor = mainColor
+                )
+        }
+    }
 }

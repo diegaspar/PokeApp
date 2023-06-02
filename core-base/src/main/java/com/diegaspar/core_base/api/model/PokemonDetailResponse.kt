@@ -14,7 +14,7 @@ data class PokemonDetailResponse(
 
 fun PokemonDetailResponse.toPokemonDetail() = PokemonDetail(
     name = this.name,
-    imageUrl = this.sprites.other.officialArtWork.frontDefault,
+    imageUrl = this.sprites.other.officialArtWork.frontDefault.orEmpty(),
     typesList = this.types.map { it.type.name },
 )
 
@@ -36,11 +36,11 @@ data class Sprites(
 )
 
 data class Other(
-    @SerializedName("official-artWork")
+    @SerializedName("official-artwork")
     val officialArtWork: OfficialArtwork
 )
 
 data class OfficialArtwork(
     @SerializedName("front_default")
-    val frontDefault: String
+    val frontDefault: String?
 )

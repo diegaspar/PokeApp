@@ -12,7 +12,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Divider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,15 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.lifecycle.ViewModel
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.diegaspar.core_ui.components.InitialLoading
 import com.diegaspar.pokemonlist.R
 import com.diegaspar.pokemonlist.presentation.extensions.isScrolledTo80PerCent
 import com.diegaspar.pokemonlist.presentation.model.PokemonUI
@@ -45,21 +42,23 @@ import org.koin.androidx.compose.koinViewModel
 
 @ExperimentalComposeUiApi
 @Composable
-fun PokemonListScreen(viewModel: PokemonListViewModel = koinViewModel()) {
-
+fun PokemonListScreen(
+    onNavigateToPokemonDetail: (id: String) -> Unit,
+    viewModel: PokemonListViewModel = koinViewModel()
+) {
     val pokemonListState by viewModel.uiState.collectAsState()
     when (pokemonListState) {
         PokemonListState.InitialLoadingState -> InitialLoading()
         PokemonListState.ErrorStateEmptyList -> EmptyErrorState(viewModel)
         is PokemonListState.ErrorState -> ErrorMessage(
             (pokemonListState as PokemonListState.ErrorState).pokemonList,
-            viewModel
+            viewModel, onNavigateToPokemonDetail
         )
 
 
         is PokemonListState.SuccessState -> PokemonList(
             (pokemonListState as PokemonListState.SuccessState).pokemonList,
-            viewModel
+            viewModel, onNavigateToPokemonDetail
         )
 
     }
@@ -93,7 +92,11 @@ fun EmptyErrorState(viewModel: PokemonListViewModel) {
 }
 
 @Composable
-fun PokemonList(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
+fun PokemonList(
+    pokemonList: List<PokemonUI>,
+    viewModel: PokemonListViewModel,
+    onNavigateToPokemonDetail: (id: String) -> Unit
+) {
     val scrollState = rememberLazyListState()
     Box(
         modifier = Modifier
@@ -103,7 +106,7 @@ fun PokemonList(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
     ) {
         LazyColumn(modifier = Modifier.fillMaxSize(), state = scrollState) {
             items(pokemonList, itemContent = {
-                PokemonRow(it)
+                PokemonRow(it) { onNavigateToPokemonDetail(it.id) }
             })
         }
     }
@@ -121,12 +124,12 @@ fun PokemonList(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
 }
 
 @Composable
-private fun PokemonRow(it: PokemonUI) {
+private fun PokemonRow(it: PokemonUI, onNavigateToPokemonDetail: () -> Unit) {
     ConstraintLayout(
         modifier = Modifier
             .background(Color.White)
             .clickable {
-                //TODO Go to detail screen
+                onNavigateToPokemonDetail()
             }
     ) {
         val (name, id, divider) = createRefs()
@@ -158,24 +161,15 @@ private fun PokemonRow(it: PokemonUI) {
 }
 
 @Composable
-fun InitialLoading() {
-    ConstraintLayout(Modifier.fillMaxSize()) {
-        val (initialLoading) = createRefs()
-        Box(modifier = Modifier.constrainAs(initialLoading) {
-            top.linkTo(parent.top)
-            bottom.linkTo(parent.bottom)
-            start.linkTo(parent.start)
-            end.linkTo(parent.end)
-        }) {
-            CircularProgressIndicator()
-        }
-    }
-
-}
-
-@Composable
-fun ErrorMessage(pokemonList: List<PokemonUI>, viewModel: PokemonListViewModel) {
-    PokemonList(pokemonList = pokemonList, viewModel = viewModel)
+fun ErrorMessage(
+    pokemonList: List<PokemonUI>,
+    viewModel: PokemonListViewModel,
+    onNavigateToPokemonDetail: (id: String) -> Unit
+) {
+    PokemonList(
+        pokemonList = pokemonList, viewModel = viewModel,
+        onNavigateToPokemonDetail
+    )
     ErrorToast()
 }
 

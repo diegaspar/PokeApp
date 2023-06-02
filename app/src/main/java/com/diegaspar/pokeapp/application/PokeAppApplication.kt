@@ -1,4 +1,4 @@
-package com.diegaspar.pokeapp
+package com.diegaspar.pokeapp.application
 
 import android.app.Application
 import com.diegaspar.core_base.di.dataModule

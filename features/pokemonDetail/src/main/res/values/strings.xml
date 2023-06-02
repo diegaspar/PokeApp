@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error_retrieving_pokemon_detal">There was an error retrieving the pokemon detail</string>
+    <string name="button_try_again">Try again</string>
+    <string name="something_went_wrong_pokemon_detail">Something went wrong getting the pokemon information</string>
+    <string name="content_description_pokemon_detail_image">Pokemon detail image</string>
+</resources>

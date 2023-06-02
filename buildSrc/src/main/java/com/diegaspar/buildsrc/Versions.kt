@@ -9,12 +9,14 @@ object Versions {
     const val composeMaterial3 = "1.1.0"
     const val constraintLayoutCompose = "1.0.1"
     const val lottie = "6.0.0"
+    const val coil = "2.2.2"
+    const val palette = "1.0.0"
 
     const val koin = "3.4.1"
     const val koinCompose = "3.4.5"
     const val retrofit = "2.9.0"
     const val coroutines = "1.3.9"
-
+    const val navigationCompose = "2.5.3"
 
     const val jUnit = "4.13.2"
     const val jUnitAndroid = "1.1.3"
