@@ -16,7 +16,6 @@
             <option value="$PROJECT_DIR$/features" />
             <option value="$PROJECT_DIR$/features/pokemonDetail" />
             <option value="$PROJECT_DIR$/features/pokemonList" />
-            <option value="$PROJECT_DIR$/persistence" />
           </set>
         </option>
       </GradleProjectSettings>

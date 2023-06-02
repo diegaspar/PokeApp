@@ -15,7 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "PokeApp"
 include (":app")
 include (":features")
-include (":persistence")
 include(":features:pokemonList")
 include(":features:pokemonDetail")
 include(":core-base")

@@ -53,7 +53,6 @@ android {
 dependencies {
 
     implementation(project(":core-base"))
-    implementation(project(":persistence"))
     implementation(project(":features:pokemonList"))
     implementation(project(":features:pokemonDetail"))
 

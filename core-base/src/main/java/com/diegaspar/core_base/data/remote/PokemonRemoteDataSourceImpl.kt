@@ -1,4 +1,4 @@
-package com.diegaspar.core_base.data
+package com.diegaspar.core_base.data.remote
 
 import com.diegaspar.core_base.api.PokemonApiService
 import com.diegaspar.core_base.api.model.toPokemonDetail

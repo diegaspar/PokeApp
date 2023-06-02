@@ -14,6 +14,7 @@ object Versions {
 
     const val koin = "3.4.1"
     const val koinCompose = "3.4.5"
+    const val room = "2.5.1"
     const val retrofit = "2.9.0"
     const val coroutines = "1.3.9"
     const val navigationCompose = "2.5.3"

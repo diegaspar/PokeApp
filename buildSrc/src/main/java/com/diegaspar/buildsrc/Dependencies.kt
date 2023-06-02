@@ -18,6 +18,9 @@ object Dependencies {
 
     val koin by lazy { "io.insert-koin:koin-android:${Versions.koin}" }
     val koinCompose by lazy { "io.insert-koin:koin-androidx-compose:${Versions.koinCompose}" }
+    val room by lazy { "androidx.room:room-runtime:${Versions.room}" }
+    val roomAnnotationProcessor by lazy { "androidx.room:room-compiler:${Versions.room}" }
+    val roomKtx by lazy { "androidx.room:room-ktx:${Versions.room}" }
     val retrofit by lazy { "com.squareup.retrofit2:retrofit:${Versions.retrofit}" }
     val retrofitConverterGson by lazy { "com.squareup.retrofit2:converter-gson:${Versions.retrofit}" }
     val coroutines by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}" }
