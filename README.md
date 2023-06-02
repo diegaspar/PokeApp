@@ -21,9 +21,8 @@ Android Jetpack Compose Pokemon App based on the api https://pokeapi.co/. Gettin
 - [MVVM](https://developer.android.com/jetpack/docs/guide) (Architecture)
 - [Coroutines](https://developer.android.com/kotlin/coroutines)
 - [Jetpack Compose](https://developer.android.com/jetpack/compose)
+- [Room](https://developer.android.com/training/data-storage/room)
 - [Lottie](https://github.com/airbnb/lottie-android)
 - [Coil](https://coil-kt.github.io/coil/)
 - [Palette](https://developer.android.com/develop/ui/views/graphics/palette-colors)
-
-
 - [Mockito](https://site.mockito.org/)
