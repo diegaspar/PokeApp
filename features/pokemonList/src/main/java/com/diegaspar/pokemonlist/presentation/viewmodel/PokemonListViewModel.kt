@@ -64,7 +64,7 @@ class PokemonListViewModel(
                         pokemonUIMapper.mapFromDomain(pokemon)
                     }).mapIndexed { index, pokemonUI ->
                 pokemonUIMapper.addIndexNumber(
-                    index,
+                    index + 1,
                     pokemonUI
                 )
             },
