@@ -144,7 +144,9 @@ private fun PokemonRow(it: PokemonUI, onNavigateToPokemonDetail: () -> Unit) {
                     top.linkTo(parent.top)
                 }
                 .padding(horizontal = 8.dp, vertical = 12.dp))
-        Text(text = it.name, modifier = Modifier
+        Text(text = it.name,
+            color = Color.Black,
+            modifier = Modifier
             .constrainAs(name) {
                 start.linkTo(id.end)
                 top.linkTo(id.top)
