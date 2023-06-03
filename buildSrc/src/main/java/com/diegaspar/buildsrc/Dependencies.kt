@@ -27,4 +27,9 @@ object Dependencies {
     val navigationCompose by lazy { "androidx.navigation:navigation-compose:${Versions.navigationCompose}" }
 
     val jUnit by lazy { "junit:junit:${Versions.jUnit}" }
+    val mockitoCore by lazy { "org.mockito:mockito-core:${Versions.mockitoCore}" }
+    val mockitoKotlin by lazy { "org.mockito.kotlin:mockito-kotlin:${Versions.mockitoKotlin}" }
+    val mockitoInline by lazy { "org.mockito:mockito-inline:${Versions.mockitoInline}" }
+    val coroutinesTest by lazy { "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutinesTest}" }
+    val arch by lazy { "androidx.arch.core:core-testing:${Versions.arch}" }
 }

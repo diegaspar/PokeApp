@@ -20,13 +20,9 @@ object Versions {
     const val navigationCompose = "2.5.3"
 
     const val jUnit = "4.13.2"
-    const val jUnitAndroid = "1.1.3"
-    const val testRulesRunner = "1.4.0"
-    const val coroutinesTest = "1.6.0"
-    const val mockitoKotlin = "4.0.0"
-    const val mockitoAndroid = "4.2.0"
-    const val mockitoAndroidInline = "2.28.1"
-    const val mockitoInline = "4.1.0"
-    const val kluent = "1.68"
-    const val arch = "2.1.0"
+    const val mockitoCore= "5.3.1"
+    const val mockitoKotlin = "5.0.0"
+    const val mockitoInline = "5.2.0"
+    const val coroutinesTest = "1.7.1"
+    const val arch = "2.2.0"
 }

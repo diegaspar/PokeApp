@@ -34,13 +34,7 @@ class PokemonListViewModel(
         }
     }
 
-    init {
-        viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
-            getNewPokemons()
-        }
-    }
-
-    fun getMorePokemons() {
+    fun getPokemons() {
         if (hasNextPage()) {
             viewModelScope.launch(Dispatchers.IO + exceptionHandler) {
                 getNewPokemons()

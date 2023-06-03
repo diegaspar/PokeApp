@@ -48,7 +48,10 @@ fun PokemonListScreen(
 ) {
     val pokemonListState by viewModel.uiState.collectAsState()
     when (pokemonListState) {
-        PokemonListState.InitialLoadingState -> InitialLoading()
+        PokemonListState.InitialLoadingState -> {
+            InitialLoading()
+            viewModel.getPokemons()
+        }
         PokemonListState.ErrorStateEmptyList -> EmptyErrorState(viewModel)
         is PokemonListState.ErrorState -> ErrorMessage(
             (pokemonListState as PokemonListState.ErrorState).pokemonList,
@@ -84,7 +87,7 @@ fun EmptyErrorState(viewModel: PokemonListViewModel) {
                 text = stringResource(R.string.something_went_wrong_pokemons_list),
                 modifier = Modifier.padding(12.dp)
             )
-            Button(onClick = { viewModel.getMorePokemons() }) {
+            Button(onClick = { viewModel.getPokemons() }) {
                 Text(stringResource(R.string.button_try_again))
             }
         }
@@ -118,7 +121,7 @@ fun PokemonList(
     }
 
     LaunchedEffect(endOfListReached) {
-        viewModel.getMorePokemons()
+        viewModel.getPokemons()
     }
 
 }

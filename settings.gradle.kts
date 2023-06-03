@@ -12,6 +12,8 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+
 rootProject.name = "PokeApp"
 include (":app")
 include (":features")

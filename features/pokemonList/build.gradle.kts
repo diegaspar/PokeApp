@@ -24,17 +24,23 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.5"
+    }
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "11"
+        }
     }
 }
 
@@ -58,7 +64,13 @@ dependencies {
     implementation(Dependencies.koinCompose)
     implementation(Dependencies.lottieCompose)
 
-    testImplementation(Dependencies.jUnit)
     debugImplementation(Dependencies.composeTooling)
     debugImplementation(Dependencies.composeTestManifest)
+
+    testImplementation(Dependencies.jUnit)
+    testImplementation(Dependencies.mockitoCore)
+    testImplementation(Dependencies.mockitoKotlin)
+    testImplementation(Dependencies.mockitoInline)
+    testImplementation(Dependencies.coroutinesTest)
+    testImplementation(Dependencies.arch)
 }

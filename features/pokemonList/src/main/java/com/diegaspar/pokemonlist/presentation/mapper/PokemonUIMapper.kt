@@ -16,6 +16,6 @@ class PokemonUIMapper {
     fun addIndexNumber(index: Int, pokemonUI: PokemonUI) =
         pokemonUI.copy(index = index.toString())
 
-    private fun extractIdFromUrl(pokemonDomain: Pokemon) =
+    fun extractIdFromUrl(pokemonDomain: Pokemon) =
         pokemonDomain.url.trimEnd('/').split("/").last()
 }
