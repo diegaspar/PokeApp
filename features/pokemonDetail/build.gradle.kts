@@ -24,11 +24,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -63,4 +63,11 @@ dependencies {
     testImplementation(Dependencies.jUnit)
     debugImplementation(Dependencies.composeTooling)
     debugImplementation(Dependencies.composeTestManifest)
+
+    testImplementation(Dependencies.jUnit)
+    testImplementation(Dependencies.mockitoCore)
+    testImplementation(Dependencies.mockitoKotlin)
+    testImplementation(Dependencies.mockitoInline)
+    testImplementation(Dependencies.coroutinesTest)
+    testImplementation(Dependencies.arch)
 }

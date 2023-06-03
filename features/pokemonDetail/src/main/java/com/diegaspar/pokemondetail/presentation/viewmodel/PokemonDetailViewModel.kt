@@ -38,12 +38,6 @@ class PokemonDetailViewModel(
 
     }
 
-    private suspend fun getPokemonFromUseCase(id: String) = PokemonDetailState.SuccessState(
-        pokemonDetailUIMapper.mapFromDomain(
-            getPokemonDetailUseCase.invoke(GetPokemonDetailUseCase.Params(id))
-        )
-    )
-
     fun onColorsLoaded(mainColor: Int) {
         _uiState.update {
             (_uiState.value as PokemonDetailState.SuccessState)
@@ -52,4 +46,10 @@ class PokemonDetailViewModel(
                 )
         }
     }
+
+    private suspend fun getPokemonFromUseCase(id: String) = PokemonDetailState.SuccessState(
+        pokemonDetailUIMapper.mapFromDomain(
+            getPokemonDetailUseCase.invoke(GetPokemonDetailUseCase.Params(id))
+        )
+    )
 }
