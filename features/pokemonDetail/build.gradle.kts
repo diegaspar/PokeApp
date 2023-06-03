@@ -60,7 +60,6 @@ dependencies {
     implementation(Dependencies.coilCompose)
     implementation(Dependencies.palette)
 
-    testImplementation(Dependencies.jUnit)
     debugImplementation(Dependencies.composeTooling)
     debugImplementation(Dependencies.composeTestManifest)
 
