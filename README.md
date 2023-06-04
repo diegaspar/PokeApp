@@ -1,5 +1,5 @@
 # PokeApp
-Android Jetpack Compose Pokemon App based on the api https://pokeapi.co/. Getting all the pokemons in paginated mode, and going to the detail of every pokemon itself.
+Android **Jetpack Compose** Pokemon App based on the api https://pokeapi.co/. Getting all the pokemons in paginated mode, and going to the detail of every pokemon itself, persisting the data of the detail of each Pokemon.
 
 
 In the detail of the Pokemon, after loading the image of the pokemon, using **Palette** to determine the **dominant** color and applying it to the background/and types of the Pokemon.
