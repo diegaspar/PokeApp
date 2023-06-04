@@ -62,7 +62,7 @@ Everything related to the common Compose components UI that can be reusable.
 
 ## features
 - **pokemonList** > Module related to the list of pokemons (Initial Screen) [Composables-States-ViewModel-UseCase]
-- **pokemonDetail** > Module related to the detail of pokemon (Detail Secondary Screen) [Composables-States-ViewModel-UseCase]
+- **pokemonDetail** > Module related to the detail of pokemon (Detail Secondary Screen) [Composables-States-ViewModel-UseCase] , it also persists the data in Room.
 
 ----
 
