@@ -18,7 +18,7 @@ Offline mode.
 
 
 ## Clean Architecture based on : 
-- **JetpackCompose View**
+- **Jetpack Compose**
 - **ViewModel**
 - **Use Case**
 - **Repository**
