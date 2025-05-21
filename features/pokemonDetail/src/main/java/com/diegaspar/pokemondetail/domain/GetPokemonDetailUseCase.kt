@@ -1,7 +1,7 @@
 package com.diegaspar.pokemondetail.domain
 
 import com.diegaspar.core_base.domain.PokemonDetail
-import com.diegaspar.core_base.repo.PokemonRepo
+import com.diegaspar.core_base.domain.PokemonRepo
 
 class GetPokemonDetailUseCase(private val pokemonRepository: PokemonRepo) {
     suspend operator fun invoke(params: Params): PokemonDetail =

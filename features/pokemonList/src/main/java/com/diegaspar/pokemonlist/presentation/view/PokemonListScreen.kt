@@ -52,16 +52,18 @@ fun PokemonListScreen(
             InitialLoading()
             viewModel.getPokemons()
         }
-        PokemonListState.ErrorStateEmptyList -> EmptyErrorState(viewModel)
+        PokemonListState.ErrorStateEmptyList -> EmptyErrorState(onTryAgain = viewModel::getPokemons)
         is PokemonListState.ErrorState -> ErrorMessage(
-            (pokemonListState as PokemonListState.ErrorState).pokemonList,
-            viewModel, onNavigateToPokemonDetail
+            pokemonList = (pokemonListState as PokemonListState.ErrorState).pokemonList,
+            onLoadMore = viewModel::getPokemons,
+            onNavigateToPokemonDetail = onNavigateToPokemonDetail
         )
 
 
         is PokemonListState.SuccessState -> PokemonList(
-            (pokemonListState as PokemonListState.SuccessState).pokemonList,
-            viewModel, onNavigateToPokemonDetail
+            pokemonList = (pokemonListState as PokemonListState.SuccessState).pokemonList,
+            onLoadMore = viewModel::getPokemons,
+            onNavigateToPokemonDetail = onNavigateToPokemonDetail
         )
 
     }
@@ -69,7 +71,7 @@ fun PokemonListScreen(
 
 
 @Composable
-fun EmptyErrorState(viewModel: PokemonListViewModel) {
+fun EmptyErrorState(onTryAgain: () -> Unit) {
     ErrorToast()
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -87,7 +89,7 @@ fun EmptyErrorState(viewModel: PokemonListViewModel) {
                 text = stringResource(R.string.something_went_wrong_pokemons_list),
                 modifier = Modifier.padding(12.dp)
             )
-            Button(onClick = { viewModel.getPokemons() }) {
+            Button(onClick = { onTryAgain() }) {
                 Text(stringResource(R.string.button_try_again))
             }
         }
@@ -97,7 +99,7 @@ fun EmptyErrorState(viewModel: PokemonListViewModel) {
 @Composable
 fun PokemonList(
     pokemonList: List<PokemonUI>,
-    viewModel: PokemonListViewModel,
+    onLoadMore: () -> Unit,
     onNavigateToPokemonDetail: (id: String) -> Unit
 ) {
     val scrollState = rememberLazyListState()
@@ -121,7 +123,7 @@ fun PokemonList(
     }
 
     LaunchedEffect(endOfListReached) {
-        viewModel.getPokemons()
+        onLoadMore()
     }
 
 }
@@ -168,11 +170,11 @@ private fun PokemonRow(it: PokemonUI, onNavigateToPokemonDetail: () -> Unit) {
 @Composable
 fun ErrorMessage(
     pokemonList: List<PokemonUI>,
-    viewModel: PokemonListViewModel,
+    onLoadMore: () -> Unit,
     onNavigateToPokemonDetail: (id: String) -> Unit
 ) {
     PokemonList(
-        pokemonList = pokemonList, viewModel = viewModel,
+        pokemonList = pokemonList, onLoadMore = onLoadMore,
         onNavigateToPokemonDetail
     )
     ErrorToast()
