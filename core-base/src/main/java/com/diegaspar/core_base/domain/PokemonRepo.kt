@@ -1,4 +1,4 @@
-package com.diegaspar.core_base.repo
+package com.diegaspar.core_base.domain
 
 import com.diegaspar.core_base.domain.PokemonDetail
 import com.diegaspar.core_base.domain.PokemonListPaginated

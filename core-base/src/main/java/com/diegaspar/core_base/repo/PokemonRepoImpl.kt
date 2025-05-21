@@ -5,6 +5,7 @@ import com.diegaspar.core_base.data.persistence.mapper.PokemonEntityMapper
 import com.diegaspar.core_base.data.remote.PokemonRemoteDataSource
 import com.diegaspar.core_base.domain.PokemonDetail
 import com.diegaspar.core_base.domain.PokemonListPaginated
+import com.diegaspar.core_base.domain.PokemonRepo
 
 class PokemonRepoImpl(
     private val remoteDataSource: PokemonRemoteDataSource,

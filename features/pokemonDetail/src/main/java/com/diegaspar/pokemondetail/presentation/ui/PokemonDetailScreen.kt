@@ -52,16 +52,16 @@ fun PokemonDetailScreen(pokemonId: String, viewModel: PokemonDetailViewModel = k
     val pokemonDetailState by viewModel.uiState.collectAsState()
 
     when (pokemonDetailState) {
-        is PokemonDetailState.ErrorState -> EmptyErrorState(pokemonId, viewModel)
+        is PokemonDetailState.ErrorState -> EmptyErrorState(pokemonId, onTryAgain = { viewModel.loadPokemonDetail(pokemonId) })
         PokemonDetailState.InitialLoadingState -> {
             InitialLoading()
             viewModel.loadPokemonDetail(pokemonId)
         }
 
         is PokemonDetailState.SuccessState -> PokemonDetailed(
-            (pokemonDetailState as PokemonDetailState.SuccessState).pokemonDetail,
-            (pokemonDetailState as PokemonDetailState.SuccessState).mainColor,
-            viewModel,
+            pokemonDetail = (pokemonDetailState as PokemonDetailState.SuccessState).pokemonDetail,
+            mainColor = (pokemonDetailState as PokemonDetailState.SuccessState).mainColor,
+            onColorsLoaded = { mainColor -> viewModel.onColorsLoaded(mainColor) }
         )
     }
 }
@@ -70,7 +70,7 @@ fun PokemonDetailScreen(pokemonId: String, viewModel: PokemonDetailViewModel = k
 fun PokemonDetailed(
     pokemonDetail: PokemonDetailUI,
     mainColor: Int?,
-    viewModel: PokemonDetailViewModel
+    onColorsLoaded: (Int) -> Unit
 ) {
     ConstraintLayout(modifier = Modifier.fillMaxSize()) {
         val (name, image, backgroundImage, types) = createRefs()
@@ -118,12 +118,11 @@ fun PokemonDetailed(
                 }
                 .size(260.dp)
                 .padding(bottom = 24.dp),
-            onSuccess = { it ->
+            onSuccess = {
                 val palette = Palette.from(it.result.drawable.toBitmap()).generate()
-                viewModel.onColorsLoaded(
-                    mainColor = palette.dominantSwatch?.let { Color(it.rgb).toArgb() }
-                        ?: Color.LightGray.toArgb()
-                )
+                val color = palette.dominantSwatch?.let { Color(it.rgb).toArgb() }
+                    ?: Color.LightGray.toArgb()
+                onColorsLoaded(color)
             },
         )
 
@@ -154,7 +153,7 @@ fun PokemonDetailed(
 }
 
 @Composable
-fun EmptyErrorState(pokemonId: String, viewModel: PokemonDetailViewModel) {
+fun EmptyErrorState(pokemonId: String, onTryAgain: () -> Unit) {
     ErrorToast()
     Box(modifier = Modifier.fillMaxSize()) {
         Column(
@@ -176,7 +175,7 @@ fun EmptyErrorState(pokemonId: String, viewModel: PokemonDetailViewModel) {
                     .padding(12.dp),
                 textAlign = TextAlign.Center
             )
-            Button(onClick = { viewModel.loadPokemonDetail(pokemonId) }) {
+            Button(onClick = { onTryAgain() }) {
                 Text(stringResource(R.string.button_try_again))
             }
         }
